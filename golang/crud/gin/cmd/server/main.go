@@ -11,7 +11,7 @@ func main() {
 	config.SetupBootstrap()
 	logger.SetupLogger()
 	datasource.SetupMySQL()
-	api.SetupRoutes()
+	api.SetupWebServer()
 }
 
 func Run() {

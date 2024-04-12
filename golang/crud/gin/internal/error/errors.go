@@ -10,6 +10,7 @@ type Type int
 const (
 	Validation Type = iota + 1
 	UnknownMistake
+	Unauthorized
 )
 
 type ApplicationError struct {
@@ -34,6 +35,12 @@ func NewUnknownMistake(message string) *ApplicationError {
 		Message: message,
 	}
 }
+func NewUnauthorized(message string) *ApplicationError {
+	return &ApplicationError{
+		Type:    Unauthorized,
+		Message: message,
+	}
+}
 
 func GetStatus(err error) int {
 	var appError *ApplicationError
@@ -44,6 +51,8 @@ func GetStatus(err error) int {
 			return http.StatusBadRequest
 		case UnknownMistake:
 			return http.StatusInternalServerError
+		case Unauthorized:
+			return http.StatusUnauthorized
 		}
 	}
 	return http.StatusInternalServerError

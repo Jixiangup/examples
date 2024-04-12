@@ -20,7 +20,7 @@ func setupControllers() {
 	accountController = controller.NewAccountController(service.NewAccountService(repository.NewAccountRepository(datasource.MySQLInstance)))
 }
 
-func SetupRoutes() *gin.Engine {
+func SetupWebServer() *gin.Engine {
 	gin.SetMode(os.Getenv(constants.GinMode))
 	engine := gin.Default()
 
@@ -52,8 +52,4 @@ func registerMiddleware(engine *gin.Engine) *gin.Engine {
 func registerRouting(engine *gin.Engine) {
 	// 注册账户相关路由
 	registerAccounts(engine)
-}
-
-func registerAccounts(engine *gin.Engine) {
-	engine.GET("/account/:id", accountController.AccountDetail)
 }
