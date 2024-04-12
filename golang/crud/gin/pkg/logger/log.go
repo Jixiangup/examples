@@ -2,8 +2,11 @@ package logger
 
 import (
 	"fmt"
+	"jixiangup.me/examples/gin/internal/constants"
+	"jixiangup.me/examples/gin/pkg/util/str"
 	"log"
 	"os"
+	"strings"
 )
 
 type LogLevel int
@@ -27,8 +30,18 @@ var logLevelNames = []string{
 // Log 导出日志对象 默认日志级别为INFO
 var Log *Logger
 
-func init() {
-	Log = NewLogger(INFO)
+func SetupLogger() {
+	loggerLevel := os.Getenv(constants.LogLevel)
+	if loggerLevel == "" {
+		loggerLevel = "INFO"
+	}
+	loggerLevel = strings.ToUpper(loggerLevel)
+	contains, index := str.ContainsString(logLevelNames, loggerLevel)
+	if contains {
+		Log = NewLogger(LogLevel(index))
+	} else {
+		Log = NewLogger(INFO)
+	}
 }
 
 type Logger struct {

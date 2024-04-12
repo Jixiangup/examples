@@ -14,7 +14,7 @@ func NewAccountRepository(db *gorm.DB) *AccountRepository {
 	return &AccountRepository{db: db}
 }
 
-func (r AccountRepository) GetUserById(id int64) (*entities.Account, error) {
+func (r AccountRepository) GetAccountById(id int64) (*entities.Account, error) {
 	var (
 		account entities.Account
 		db      = r.db

@@ -16,7 +16,7 @@ var MySQLInstance *gorm.DB
 // lock 用于确保数据库连接的线程安全
 var lock = &sync.Mutex{}
 
-func init() {
+func SetupMySQL() {
 	if MySQLInstance == nil {
 		lock.Lock()
 		defer lock.Unlock()
