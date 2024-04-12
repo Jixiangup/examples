@@ -1,23 +1,56 @@
-# GIN Restful API Example
+# 项目名称
 
-这是使用 GIN 框架的 RESTful API 的简单示例。
+## 项目简介
 
-## 项目结构
+这是一个使用 Go 语言和 Gin 框架开发的 web 服务项目。项目主要包含以下功能：
+
+- [x] 权限验证：使用 Bearer Token 进行权限验证。
+- [x] 异常处理：统一处理应用程序的异常。
+- [ ] 账户管理：包括账户的创建、查询、更新和删除。
+
+## 目录结构
+
+以下是项目的基本目录结构：
 
 ```
 .
-├── README.md       # 项目说明文档
-├── go.mod          # Go modules 的依赖管理文件
-├── go.sum          # Go modules 的依赖校验文件
-├── main.go         # 项目的入口文件
-├── cmd             # 应用程序的主要执行文件
-│   └── server
-│       └── main.go # 服务器的主要执行文件，负责启动服务器
-├── internal        # internal 目录包含了项目的内部包，这些包只能被当前项目使用
-│   ├── api
-│   │   └── router.go # 路由配置文件，定义了所有 API 路由和对应的处理函数
-│   └── config
-│       └── config.go # 配置文件，包含了项目运行所需的配置信息，如数据库连接信息
-└── pkg             # pkg 目录包含了可以被其他项目使用的库代码
-    └── error       # 错误处理相关的代码，提供了统一的错误处理机制
+├── cmd
+│   ├── server      # 服务启动目录
+├── internal        # 内部代码
+│   ├── api         # API 接口
+│   ├── config      # 系统配置或加载
+│   ├── constants   # 常量定义
+│   ├── controller  # 控制器
+│   ├── datasource  # 数据源
+│   ├── error       # 错误处理
+│   ├── middleware  # 中间件
+│   ├── model       # 数据模型
+│   ├── repository  # 数据仓库
+│   ├── service     # 服务
+├── pkg             # 通用包
+├── sql             # 数据库脚本
+├── web             # 静态资源
+├── .env            # 环境变量
+├── .example.env    # 环境变量示例
+├── .gitignore      # Git 忽略文件
+├── README.md       # 项目说明
+├── main.go         # 项目入口
+├── go.mod          # 项目依赖
+└── go.mod          # 项目依赖
+```
+
+## 如何运行
+
+在项目根目录下运行以下命令：
+
+```bash
+go run .
+```
+
+## 如何测试
+
+在项目根目录下运行以下命令：
+
+```bash
+go test ./...
 ```
