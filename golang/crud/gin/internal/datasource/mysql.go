@@ -24,7 +24,7 @@ func SetupMySQL() {
 			dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=true", os.Getenv(constants.DbUser), os.Getenv(constants.DbPassword), os.Getenv(constants.DbHost), os.Getenv(constants.DbPort), os.Getenv(constants.DbName))
 			db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 			if err != nil {
-				logger.Log.Fatal("初始化MySQL链接失败: %s", dsn, err)
+				logger.Log.Fatal("初始化MySQL链接( %s )失败, 因为: %s", dsn, err.Error())
 			}
 			MySQLInstance = db
 		}
