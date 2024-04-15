@@ -17,8 +17,7 @@ func exec() error {
 
 func Run() {
 	err := exec()
-	if err == nil {
-		// 如果服务启动成功，那么就一直阻塞主线程
-		select {}
+	if err != nil {
+		logger.Log.Error("Failed to start server %s", err.Error())
 	}
 }
