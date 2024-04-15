@@ -3,6 +3,7 @@ package repository
 import (
 	"errors"
 	"gorm.io/gorm"
+	error2 "jixiangup.me/examples/gin/internal/error"
 	"jixiangup.me/examples/gin/internal/model/entities"
 )
 
@@ -31,4 +32,26 @@ func (r AccountRepository) GetAccountById(id int64) (*entities.Account, error) {
 	}
 
 	return &account, nil
+}
+
+func (r AccountRepository) UpdateAccount(account entities.Account) error {
+	if &account == nil {
+		return error2.NewUnknownMistake("account cannot be nil")
+	}
+	result := r.db.Model(account).Updates(account)
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
+}
+
+func (r AccountRepository) InsertAccount(account entities.Account) error {
+	if &account == nil {
+		return error2.NewUnknownMistake("account cannot be nil")
+	}
+	result := r.db.Create(&account)
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
 }

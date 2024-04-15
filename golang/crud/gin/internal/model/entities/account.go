@@ -4,6 +4,7 @@ type Account struct {
 	Id         *int64          `json:"id" gorm:"primary_key"`
 	Nickname   *string         `json:"nickname"`
 	Email      *string         `json:"email"`
+	Password   *string         `json:"password"`
 	Deleted    *bool           `json:"deleted"`
 	CreatedAt  *JSONFormatTime `json:"created_at" gorm:"autoCreateTime"`
 	ModifiedAt *JSONFormatTime `json:"modified_at" gorm:"autoUpdateTime"`

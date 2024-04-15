@@ -20,7 +20,10 @@ func setupControllers() {
 	accountController = controller.NewAccountController(service.NewAccountService(repository.NewAccountRepository(datasource.MySQLInstance)))
 }
 
-func SetupWebServer() *gin.Engine {
+func SetupWebServer() error {
+	var (
+		err error
+	)
 	gin.SetMode(os.Getenv(constants.GinMode))
 	engine := gin.Default()
 
@@ -37,10 +40,11 @@ func SetupWebServer() *gin.Engine {
 	if port == "" {
 		port = "5266"
 	}
-	if err := engine.Run(":" + port); err != nil {
-		logger.Log.Error("Failed to start server", err)
+
+	if err = engine.Run(":" + port); err != nil {
+		logger.Log.Error("Failed to start server %s", err.Error())
 	}
-	return engine
+	return err
 }
 
 func registerMiddleware(engine *gin.Engine) *gin.Engine {

@@ -7,13 +7,18 @@ import (
 	"jixiangup.me/examples/gin/pkg/logger"
 )
 
-func main() {
+func exec() error {
 	config.SetupBootstrap()
 	logger.SetupLogger()
 	datasource.SetupMySQL()
-	api.SetupWebServer()
+	err := api.SetupWebServer()
+	return err
 }
 
 func Run() {
-	main()
+	err := exec()
+	if err == nil {
+		// 如果服务启动成功，那么就一直阻塞主线程
+		select {}
+	}
 }
